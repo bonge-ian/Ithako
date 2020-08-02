@@ -1,0 +1,25 @@
+#hero {
+    .coming-soon {
+        min-height: calc(518px);
+    }
+
+    .game-title,
+    .game-link {
+        color: #fef5ee;
+    }
+
+    .hero-card {
+        min-height: calc(336.2px);
+    }
+
+    .desc-overlay {
+        background-color: scale-color($color: $secondary-color, $alpha: -48%);
+    }
+}
+
+@supports (backdrop-filter: none) {
+    .desc-overlay {
+        backdrop-filter: blur(5px) contrast(0.8);
+        background-color: scale-color($color: $secondary-color, $alpha: -50%);
+    }
+}
