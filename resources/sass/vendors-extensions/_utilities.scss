@@ -1,0 +1,7 @@
+// link override.
+a.uk-link-heading:hover,
+.uk-link-heading a:hover,
+.uk-link-toggle:hover .uk-link-heading,
+.uk-link-toggle:focus .uk-link-heading {
+    color: $global-color;
+}

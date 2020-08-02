@@ -1,0 +1,40 @@
+.bb-grey {
+    border-bottom: 1px solid $global-color;
+}
+
+.button-transparent {
+    border: 1px solid $global-primary-background;
+    background: transparent;
+    transition: background-color 0.343s ease-in;
+
+    &:hover {
+        background: darken($global-primary-background, 10%);
+    }
+}
+
+.text-white {
+    color: $white-color;
+}
+
+.primary-divider {
+    &::after,
+    &::before {
+        border-color: $global-primary-background;
+    }
+}
+
+.rating {
+    bottom: calc(-1rem);
+    right: calc(-1rem);
+    width: 4rem;
+    font-size: 1rem;
+    height: 4rem;
+}
+
+.text-primary {
+    color: $global-primary-background;
+}
+
+.light-overlay {
+    background-color: scale-color($color: $secondary-color, $alpha: -40%);
+}
