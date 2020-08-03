@@ -5,7 +5,7 @@
 @section('content')
 <!-- hero section -->
 <section class="uk-section uk-section-muted uk-section-large uk-padding-remove-vertical" id="hero">
-    <div class="uk-grid-collapse" uk-grid >
+    <div class="uk-grid-collapse" uk-grid>
         <div class="uk-width-3-4@l uk-grid-item-match coming-soon">
             <div class="uk-flex">
                 <div class="uk-tile uk-width-1-1 uk-flex-bottom uk-flex uk-background-cover uk-background-center-center uk-background-norepeat"
@@ -33,7 +33,7 @@
         <div class="uk-width-1-4@l ">
             <aside class="uk-child-width-1-1 uk-child-width-1-2@s uk-child-width-1-1@l uk-grid-collapse" uk-grid>
                 <div>
-                    <div class="uk-inline-clip hero-card" >
+                    <div class="uk-inline-clip hero-card">
                         <canvas width="595" height="336"></canvas>
                         <img alt=" " uk-img uk-cover
                             data-src="https://images.igdb.com/igdb/image/upload/t_720p/co1wyy.jpg ">
@@ -74,6 +74,18 @@
 <!-- end of hero -->
 
 
+<section class="uk-section">
+    <div class="uk-container uk-container-expand">
+        {{-- Recent Games --}}
+        <h3 class="uk-h2 text-white uk-text-capitalize">Recent Games</h3>
+        <hr class="uk-divider-small primary-divider">
+        <livewire:recent-games></livewire:recent-games>
+
+        <h3 class="uk-h2 text-white uk-margin-large-top">Popular Now</h3>
+        <hr class="uk-divider-small primary-divider">
+        <livewire:popular-games></livewire:popular-games>
+    </div>
+</section>
 
 <section class="uk-section">
     <div class="uk-container uk-container-expand">
