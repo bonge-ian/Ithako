@@ -13,7 +13,9 @@
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Varta:wght@400;500;700&display=swap" rel="stylesheet">
+    <livewire:styles></livewire:styles>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -26,7 +28,9 @@
 
         @include('partials.footer')
     </div>
+    <livewire:scripts></livewire:scripts>
     <script src="{{ asset('js/app.js') }}" defer></script>
+
 </body>
 
 </html>
