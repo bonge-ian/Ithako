@@ -15435,6 +15435,19 @@ iframe.uk-cover {
   background-color: rgba(26, 28, 43, 0.6);
 }
 
+.text-transparent {
+  color: transparent;
+}
+
+.skeleton-image {
+  height: 351px;
+}
+
+.bg-light-gray,
+img[data-src][src*="data:image"] {
+  background: rgba(133, 142, 175, 0.2);
+}
+
 a.uk-link-heading:hover,
 .uk-link-heading a:hover,
 .uk-link-toggle:hover .uk-link-heading,

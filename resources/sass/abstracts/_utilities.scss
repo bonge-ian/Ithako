@@ -38,3 +38,16 @@
 .light-overlay {
     background-color: scale-color($color: $secondary-color, $alpha: -40%);
 }
+
+.text-transparent {
+    color: transparent;
+}
+
+.skeleton-image {
+    height: 351px;
+}
+
+.bg-light-gray,
+img[data-src][src*="data:image"] {
+    background: scale-color($color: $muted-color, $alpha: -80%);
+}
