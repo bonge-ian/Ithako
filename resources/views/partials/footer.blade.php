@@ -8,9 +8,10 @@
                 </a>
             </div>
             <div class="uk-text-center uk-width-1-3@s">
-                <a target="_blank" href="https://twitter.com/ranjez_" class="uk-icon-button uk-margin-small-right"
-                    data-uk-icon="twitter"></a>
-                <a target="_blank" href="https://github.com/bonge-ian" class="uk-icon-button" data-uk-icon="github"></a>
+                <p class="uk-text-small uk-text-muted">Powered By:
+                    <a href="https://http://igdb.com/" target="_blank" class="uk-display-inline">IGDB</a>
+                </p>
+
             </div>
             <div class="uk-text-small uk-text-muted uk-text-center uk-text-right@s uk-width-1-3@s">
 
