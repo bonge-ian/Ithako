@@ -51,3 +51,7 @@
 img[data-src][src*="data:image"] {
     background: scale-color($color: $muted-color, $alpha: -80%);
 }
+
+.article-skeleton-image {
+    height: 187px;
+}

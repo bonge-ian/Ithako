@@ -15448,6 +15448,10 @@ img[data-src][src*="data:image"] {
   background: rgba(133, 142, 175, 0.2);
 }
 
+.article-skeleton-image {
+  height: 187px;
+}
+
 a.uk-link-heading:hover,
 .uk-link-heading a:hover,
 .uk-link-toggle:hover .uk-link-heading,
