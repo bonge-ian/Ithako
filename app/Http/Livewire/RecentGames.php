@@ -16,10 +16,13 @@ class RecentGames extends Component
     {
         $before = now()->subMonths(4)->timestamp;
 
-        $rawGames = Cache::remember('livewire.recentGames', now()->addHours(5)->timezone('Africa/Nairobi'), fn () => collect(
-            Http::withHeaders(config('services.igdb'))
-                ->withOptions([
-                    'body' => sprintf('
+        $rawGames = Cache::remember(
+            'livewire.recentGames',
+            now('Africa/Nairobi')->addHours(5),
+            fn () => collect(
+                Http::withHeaders(config('services.igdb'))
+                    ->withOptions([
+                        'body' => sprintf('
                         fields id, name, genres.name, platforms.name,cover.url;
                         where platforms = (49,48,130,6)
                         & first_release_date > %s & first_release_date < %s
@@ -27,17 +30,13 @@ class RecentGames extends Component
                         sort first_release_date desc;
                         limit 10;
                     ', $before, now()->timestamp),
-                ])
-                ->get('https://api-v3.igdb.com/games')
-                ->json()
-        ));
+                    ])
+                    ->get('https://api-v3.igdb.com/games')
+                    ->json()
+            )
+        );
 
         $this->recentGames = $this->format(($rawGames));
-    }
-
-    public function getRecentGamesProperty()
-    {
-        return Cache::get('livewire.recentGames');
     }
 
     public function render()

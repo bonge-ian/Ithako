@@ -38,17 +38,13 @@ class PopularGames extends Component
             )
         );
 
+
         $this->popularGames = $this->format($rawGames);
     }
 
     public function render()
     {
         return view('livewire.popular-games');
-    }
-
-    public function getPopularGamesProperty()
-    {
-        return Cache::get('livewire.popularGames');
     }
 
     /**
