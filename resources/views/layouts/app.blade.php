@@ -14,8 +14,7 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Varta:wght@400;500;700&display=swap" rel="stylesheet">
     <livewire:styles></livewire:styles>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
 <body>
