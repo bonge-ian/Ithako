@@ -24,7 +24,7 @@ class GamesController extends Controller
 
     public function show(string $slug)
     {
-        //
+        return view('show');
     }
 
     private function comingSoonOnPS4()

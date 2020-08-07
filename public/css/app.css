@@ -15459,6 +15459,11 @@ a.uk-link-heading:hover,
   color: #858eaf;
 }
 
+.uk-slidenav:hover,
+.uk-slidenav:focus {
+  color: rgba(254, 245, 238, 0.95);
+}
+
 #header .search-bar {
   width: 18rem;
 }

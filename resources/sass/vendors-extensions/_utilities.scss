@@ -5,3 +5,10 @@ a.uk-link-heading:hover,
 .uk-link-toggle:focus .uk-link-heading {
     color: $global-color;
 }
+
+.uk-slidenav {
+    &:hover,
+    &:focus {
+        color: scale-color($color: $white-color,  $alpha: -5%);
+    }
+}
