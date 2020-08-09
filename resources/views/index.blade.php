@@ -25,7 +25,7 @@
                                 </a>
                             </h2>
                             <div class="uk-margin-top">
-                                <a href="{{ $comingSoonOnPS4['website'] }}" target="_blank"
+                                <a href="{{ $comingSoonOnPS4['url'] }}" target="_blank"
                                     class="uk-button game-link uk-border-rounded  button-transparent">Check
                                     details</a>
                             </div>

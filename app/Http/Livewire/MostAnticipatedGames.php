@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\FormatGames;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
@@ -10,19 +11,23 @@ use Illuminate\Support\Facades\Http;
 
 class MostAnticipatedGames extends Component
 {
-    public $mostAnticipatedGames = [];
+	use FormatGames {
+		format as formatGamesTrait;
+	}
 
-    public function fetch()
+	public array $mostAnticipatedGames = [];
+
+	public function fetch()
     {
         $rawGames = Cache::remember(
-            'mostAnticipatedGames',
-            now()->timestamp,
+            'livewire.mostAnticipatedGames',
+            now()->addHours(6),
             fn () => collect(
                 Http::withHeaders(config('services.igdb'))
                     ->withOptions([
                         'body' => sprintf(
-                            'fields id, name, cover.url, slug,summary;
-                            where first_release_date > %s & platforms = (6,48,49.130);
+                            'fields id, name, cover.url, slug, summary;
+                            where first_release_date > %s & platforms = (6,48,49,130) & themes.name != ("Erotic");
                             sort popularity desc;
                             limit 6;',
                             now()->timestamp
@@ -33,9 +38,7 @@ class MostAnticipatedGames extends Component
             )
         );
 
-
         $this->mostAnticipatedGames = $this->format($rawGames);
-
     }
 
     public function render()
@@ -43,20 +46,10 @@ class MostAnticipatedGames extends Component
         return view('livewire.most-anticipated-games');
     }
 
-    private function format(Collection $games)
-    {
-        return $games->map(function ($game) {
-            return collect($game)->merge([
-                'coverImageUrl' => sprintf(
-                    'https:%s',
-                    Str::replaceFirst('thumb', 'screenshot_med', $game['cover']['url'])
-                ),
-                'altText' => sprintf('%s Cover Image', $game['name']),
-                'name' => $game['name'],
-                'slug' => $game['slug'],
-                'id' => $game['id'],
-                'summary' => Str::limit($game['summary'], 150),
-            ])->only('id', 'name', 'slug', 'altText', 'coverImageUrl', 'summary');
-        })->toArray();
-    }
+	private function format(Collection $games)
+	{
+		return $this->formatGamesTrait($games, 'screenshot_med')->map(fn($game) => $game->merge([
+			'summary' => Str::limit($game['summary'], 150),
+		]))->toArray();
+	}
 }
