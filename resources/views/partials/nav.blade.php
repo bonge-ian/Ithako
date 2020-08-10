@@ -27,12 +27,11 @@
 					</svg>
 				</a>
 				<ul class="uk-navbar-nav">
-					<li class="uk-active">
+					<li class="{{ request()->routeIs('pages.games') ? 'uk-active' : ''}} ">
 						<a href="{{ route('pages.games') }}">Games</a>
 					</li>
-					<li><a href="#">Coming Soon</a></li>
-					<li><a href="#">Top 50</a></li>
-					<li><a href="#">Reviews</a></li>
+					<li class="{{ request()->routeIs('pages.coming-soon') ? 'uk-active'  : '' }}"><a href="{{ route('pages.coming-soon') }}">Coming Soon</a></li>
+					<li class=""><a href="#">Top 50</a></li>
 				</ul>
 			</div>
 			<div class="uk-navbar-right">
@@ -93,12 +92,12 @@
 					</svg>
 				</a>
 				<ul class=" uk-flex uk-navbar-nav">
-					<li class="uk-active">
-						<a href="#">Games</a>
+					<li class="{{ request()->routeIs('pages.games') ? 'uk-active'  : '' }}">
+						<a href="{{ route('pages.games') }}">Games</a>
 					</li>
-					<li><a href="#">Coming Soon</a></li>
+					<li class="{{ request()->routeIs('pages.coming-soon') ? 'uk-active'  : '' }}"><a
+							href="{{ route('pages.coming-soon') }}">Coming Soon</a></li>
 					<li><a href="#">Top 50</a></li>
-					<li><a href="#">Reviews</a></li>
 				</ul>
 			</div>
 			<div class="uk-flex  uk-flex-middle">
