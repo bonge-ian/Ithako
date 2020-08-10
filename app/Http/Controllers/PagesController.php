@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
-class PagesController extends Controller
+class PagesController
 {
 	use FormatGames;
 
@@ -37,7 +37,11 @@ class PagesController extends Controller
         );
 
         return view('games')->with('games', $this->format($rawGames, 'cover_big', true));
+    }
 
+    public function comingSoonGames()
+    {
+        return view('comingsoon');
     }
 
 }
