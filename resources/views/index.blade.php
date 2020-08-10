@@ -90,13 +90,18 @@
 <section class="uk-section">
     <div class="uk-container uk-container-expand">
         {{-- Recent Games --}}
-        <h3 class="uk-h2 text-white uk-text-capitalize">Recent Games</h3>
-        <hr class="uk-divider-small primary-divider">
-        <livewire:recent-games></livewire:recent-games>
+        <x-games-showcase>
+            <x-slot name='title'>Recent Games</x-slot>
+            <livewire:recent-games></livewire:recent-games>
+        </x-games-showcase>
 
-        <h3 class="uk-h2 text-white uk-margin-large-top">Popular Now</h3>
-        <hr class="uk-divider-small primary-divider">
-        <livewire:popular-games></livewire:popular-games>
+        <div class="uk-margin-top"></div>
+        <x-games-showcase>
+            <x-slot name='title'>Popular Now</x-slot>
+            <livewire:popular-games></livewire:popular-games>
+        </x-games-showcase>
+
+
     </div>
 </section>
 
