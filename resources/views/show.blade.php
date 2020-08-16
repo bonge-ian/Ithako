@@ -175,7 +175,7 @@
         <div id="modal-media-image" class="uk-flex-top" uk-modal>
             <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
                 <button class="uk-modal-close-outside" type="button" uk-close></button>
-                <img data-src="{{ $game['coverImageUrl'] }}" alt="{{ $game['altText'] }}" width="1244" height="700"
+                <img data-src="{{ $game['coverImageUrl'] }}" alt="{{ $game['altText'] }}" width="700" height="393.75"
                     uk-img>
             </div>
         </div>
