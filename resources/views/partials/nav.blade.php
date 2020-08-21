@@ -1,8 +1,8 @@
 <header
 	uk-sticky="sel-target: .uk-navbar; cls-active: uk-navbar-sticky;animation: uk-animation-slide-top;show-on-up: true"
-	class="uk-box-shadow-large" id="header">
+	class="uk-box-shadow-large uk-sticky" id="header">
 	<div class="uk-navbar-container ">
-		<nav class="uk-container uk-container-large uk-visible@s"
+		<nav class="uk-container uk-container-large uk-visible@s uk-navbar"
 			uk-navbar="align: left; boundary: !.uk-navbar-container">
 			<div class="uk-navbar-left">
 				<a class="uk-navbar-item uk-logo" href="{{ route('games.index') }}">
@@ -30,45 +30,19 @@
 					<li class="{{ request()->routeIs('pages.games') ? 'uk-active' : ''}} ">
 						<a href="{{ route('pages.games') }}">Games</a>
 					</li>
-					<li class="{{ request()->routeIs('pages.coming-soon') ? 'uk-active'  : '' }}"><a href="{{ route('pages.coming-soon') }}">Coming Soon</a></li>
+					<li class="{{ request()->routeIs('pages.coming-soon') ? 'uk-active'  : '' }}"><a
+							href="{{ route('pages.coming-soon') }}">Coming Soon</a></li>
 					<li class=""><a href="#">Top 50</a></li>
 				</ul>
 			</div>
 			<div class="uk-navbar-right">
 				<div class="uk-navbar-item">
-					<form class="uk-search uk-search-navbar search-bar">
-						<span uk-search-icon uk-icon="ratio: 0.8"></span>
-						<input class="uk-search-input uk-padding-small " type="search" placeholder="Search for a game">
-
-						<!-- dropdown -->
-						<div uk-drop="
-								boundary: .uk-search;position: bottom-justify;boundary-align: true;
-								animation: uk-animation-slide-bottom-small;delay: 200;offset: 10;
-								mode: click
-							">
-							<div class="uk-panel uk-width-1-1  search-results uk-background-muted">
-								<ul class="uk-list uk-list-divider uk-margin-remove">
-									@foreach(range(1, 4) as $range)
-									<li class="uk-margin-remove ">
-										<a href="#" class="uk-flex uk-display-block uk-link-reset search-result ">
-											<img data-src="https://via.placeholder.com/40.webp" alt="thumbnail"
-												width="40" height="40" uk-img>
-											<span
-												class="uk-link-reset text-white uk-margin-small-left uk-text-middle">Grand
-												theft auto V</span>
-										</a>
-									</li>
-									@endforeach
-
-								</ul>
-							</div>
-						</div>
-					</form>
+					<livewire:search></livewire:search>
 				</div>
 			</div>
 		</nav>
 
-		<nav class='uk-container uk-hidden@s uk-flex uk-flex-middle uk-flex-column bb-grey' uk-nav>
+		<nav class='uk-container uk-hidden@s uk-flex uk-flex-middle uk-flex-column bb-grey uk-nav' uk-nav>
 			<div class="uk-flex uk-flex-column uk-flex-middle">
 				<a class="uk-navbar-item uk-logo" href="{{ route('games.index') }}">
 					<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 172 172"
@@ -100,36 +74,12 @@
 					<li><a href="#">Top 50</a></li>
 				</ul>
 			</div>
-			<div class="uk-flex  uk-flex-middle">
+			<div class="uk-panel">
 				<div class="uk-navbar-item">
-					<form class="uk-search uk-search-navbar search-bar">
-						<span uk-search-icon uk-icon="ratio: 0.8"></span>
-						<input class="uk-search-input uk-padding-small " type="search" placeholder="Search for a game">
-
-						<!-- dropdown -->
-						<div
-							uk-drop="boundary: .uk-search;position: bottom-center; animation: uk-animation-slide-bottom-small;delay: 200;offset: 10; mode: click"
-						>
-							<div class="uk-panel uk-width-1-1  search-results uk-background-muted">
-								<ul class="uk-list uk-list-divider uk-margin-remove">
-									@foreach(range(1, 4) as $range)
-									<li class="uk-margin-remove ">
-										<a href="#" class="uk-flex uk-display-block uk-link-reset search-result ">
-											<img data-src="https://via.placeholder.com/40.webp" alt="thumbnail"
-												width="40" height="40" uk-img>
-											<span
-												class="uk-link-reset text-white uk-margin-small-left uk-text-middle">Grand
-												theft auto V</span>
-										</a>
-									</li>
-									@endforeach
-
-								</ul>
-							</div>
-						</div>
-					</form>
+					<livewire:search></livewire:search>
 				</div>
 			</div>
 		</nav>
 	</div>
+
 </header>
