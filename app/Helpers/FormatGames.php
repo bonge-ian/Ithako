@@ -44,7 +44,7 @@ trait FormatGames
 			'platforms' => isset($game['platforms'])
 				? collect($game['platforms'])->pluck('abbreviation')->implode(' | ')
 				: null,
-			'rating' => isset($game['total_rating']) ? round($game['total_rating']) : null,
+			'rating' => isset($game['rating']) ? round($game['rating']) : null,
 		])->except('cover'));
 	}
 }

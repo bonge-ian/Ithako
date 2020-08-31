@@ -24,7 +24,7 @@ class RecentGames extends Component
                 Http::withHeaders(config('services.igdb'))
                     ->withOptions([
                         'body' => sprintf('
-                        fields id, slug, name, genres.name, platforms.abbreviation,cover.url, total_rating;
+                        fields id, slug, name, genres.name, platforms.abbreviation,cover.url, rating;
                         where platforms = (49,48,130,6)
                         & first_release_date > %s & first_release_date < %s
                         & cover.url != null & themes.name != ("Erotic");

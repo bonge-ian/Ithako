@@ -23,7 +23,7 @@ class PagesController
             Http::withHeaders(config('services.igdb'))
                 ->withOptions([
                     'body' => sprintf('
-                        fields name, cover.url, slug, genres.name, platforms.abbreviation,total_rating;
+                        fields name, cover.url, slug, genres.name, platforms.abbreviation,rating;
                         where platforms = (6, 48, 49, 130) & themes.name != ("Erotic");
                         sort popularity desc;
                         limit %s;
