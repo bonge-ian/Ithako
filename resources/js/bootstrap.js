@@ -1,14 +1,10 @@
-const { drop } = require("lodash");
-
-
 window._ = require("lodash");
-
 window.UIkit = require("uikit");
 window.Icons = require("uikit/dist/js/uikit-icons");
 
 UIkit.use(window.Icons);
 
-// window.ProgressBar = require('progressbar.js');
+window.ProgressBar = require("progressbar.js");
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -16,9 +12,9 @@ UIkit.use(window.Icons);
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-// window.axios = require('axios');
+window.axios = require('axios');
 //
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

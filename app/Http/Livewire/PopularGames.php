@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class PopularGames extends Component
 {
-	use FormatGames {
-		format as formatGamesTrait;
-	}
+	use FormatGames;
 
 	public array $popularGames = [];
 
@@ -23,7 +21,7 @@ class PopularGames extends Component
 		$rawGames = Cache::remember(
 			'livewire.popularGames',
 			now('Africa/Nairobi')->addHours(6),
-			fn() => collect(
+			fn () => collect(
 				Http::withHeaders(config('services.igdb'))
 					->withOptions([
 						'body' => sprintf(
@@ -42,13 +40,17 @@ class PopularGames extends Component
 			)
 		);
 
-		$this->popularGames = $this->format($rawGames);
+		$this->popularGames = $this->format($rawGames, 'cover_big', true);
 
-		collect($this->popularGames)->filter(fn($game) => $game['rating'])
-			->each(fn($game) => $this->emit('addRating', [
-				'rating' => $game['rating'] / 100,
-				'slug' => $game['slug']
-			]));
+
+		collect($this->popularGames)->filter(function ($game) {
+			return $game['rating'];
+		})->each(function ($game) {
+			$this->emit('popularGamesWithRating', [
+				'slug' => $game['slug'],
+				'rating' => $game['rating'] / 100
+			]);
+		});
 	}
 
 	public function render()
@@ -56,11 +58,10 @@ class PopularGames extends Component
 		return view('livewire.popular-games');
 	}
 
-	private function format(Collection $games)
-	{
-		return $this->formatGamesTrait($games)->map(fn($game) => $game->merge([
-			'rating' => isset($game['total_rating']) ? round($game['total_rating']) : null,
-		]))->toArray();
-	}
-
+	// private function format(Collection $games)
+	// {
+	// 	return $this->formatGamesTrait($games)->map(fn ($game) => $game->merge([
+	// 		'rating' => isset($game['total_rating']) ? round($game['total_rating']) : null,
+	// 	]))->toArray();
+	// }
 }

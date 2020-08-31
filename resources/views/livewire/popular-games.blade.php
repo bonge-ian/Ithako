@@ -11,3 +11,8 @@
     @endforelse
 
 </x-games-grid>
+@push('scripts')
+    @include('_ratings', [
+        'event' => 'popularGamesWithRating'
+    ])
+@endpush

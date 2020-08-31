@@ -33,7 +33,7 @@ trait FormatGames
 	 */
 	protected function defaults(Collection $games, string $coverImageSize = 'cover_big')
 	{
-		return $games->map(fn($game) => collect($game)->merge([
+		return $games->map(fn ($game) => collect($game)->merge([
 			'altText' => $game['name'] . ' Cover Image',
 			'coverImageUrl' => isset($game['cover'])
 				? 'https:' . Str::replaceFirst('thumb', $coverImageSize, $game['cover']['url'])
@@ -44,6 +44,7 @@ trait FormatGames
 			'platforms' => isset($game['platforms'])
 				? collect($game['platforms'])->pluck('abbreviation')->implode(' | ')
 				: null,
+			'rating' => isset($game['total_rating']) ? round($game['total_rating']) : null,
 		])->except('cover'));
 	}
 }

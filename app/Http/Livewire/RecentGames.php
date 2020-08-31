@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Http;
 
 class RecentGames extends Component
 {
-	use FormatGames;
+    use FormatGames;
 
-	public array $recentGames = [];
+    public array $recentGames = [];
 
     public function fetch()
     {
@@ -24,7 +24,7 @@ class RecentGames extends Component
                 Http::withHeaders(config('services.igdb'))
                     ->withOptions([
                         'body' => sprintf('
-                        fields id, slug, name, genres.name, platforms.abbreviation,cover.url;
+                        fields id, slug, name, genres.name, platforms.abbreviation,cover.url, total_rating;
                         where platforms = (49,48,130,6)
                         & first_release_date > %s & first_release_date < %s
                         & cover.url != null & themes.name != ("Erotic");
@@ -38,6 +38,15 @@ class RecentGames extends Component
         );
 
         $this->recentGames = $this->format($rawGames, 'cover_big', true);
+
+        collect($this->recentGames)->filter(function ($game) {
+            return $game['rating'];
+        })->each(function ($game) {
+            $this->emit('recentGamesWithRating', [
+                'slug' => $game['slug'],
+                'rating' => $game['rating'] / 100
+            ]);
+        });
     }
 
     public function render()
