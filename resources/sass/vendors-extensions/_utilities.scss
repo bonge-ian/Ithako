@@ -9,6 +9,12 @@ a.uk-link-heading:hover,
 .uk-slidenav {
     &:hover,
     &:focus {
-        color: scale-color($color: $white-color,  $alpha: -5%);
+        color: scale-color($color: $white-color, $alpha: -5%);
+    }
+}
+
+.uk-table {
+    td {
+        padding: 6px 12px;
     }
 }

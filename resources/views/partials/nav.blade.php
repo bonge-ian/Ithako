@@ -30,9 +30,12 @@
 					<li class="{{ request()->routeIs('pages.games') ? 'uk-active' : ''}} ">
 						<a href="{{ route('pages.games') }}">Games</a>
 					</li>
-					<li class="{{ request()->routeIs('pages.coming-soon') ? 'uk-active'  : '' }}"><a
-							href="{{ route('pages.coming-soon') }}">Coming Soon</a></li>
-					<li class=""><a href="#">Top 50</a></li>
+					<li class="{{ request()->routeIs('pages.coming-soon') ? 'uk-active'  : '' }}">
+						<a href="{{ route('pages.coming-soon') }}">Coming Soon</a>
+					</li>
+					<li class="{{ request()->routeIs('pages.top-50-games') ? 'uk-active'  : '' }}">
+						<a href="{{ route('pages.top-50-games') }}">Top 50</a>
+					</li>
 				</ul>
 			</div>
 			<div class="uk-navbar-right">
@@ -69,9 +72,12 @@
 					<li class="{{ request()->routeIs('pages.games') ? 'uk-active'  : '' }}">
 						<a href="{{ route('pages.games') }}">Games</a>
 					</li>
-					<li class="{{ request()->routeIs('pages.coming-soon') ? 'uk-active'  : '' }}"><a
-							href="{{ route('pages.coming-soon') }}">Coming Soon</a></li>
-					<li><a href="#">Top 50</a></li>
+					<li class="{{ request()->routeIs('pages.coming-soon') ? 'uk-active'  : '' }}">
+						<a href="{{ route('pages.coming-soon') }}">Coming Soon</a>
+					</li>
+					<li class="{{ request()->routeIs('pages.top-50-games') ? 'uk-active'  : '' }}">
+						<a href="{{ route('pages.top-50-games') }}">Top 50</a>
+					</li>
 				</ul>
 			</div>
 			<div class="uk-panel">

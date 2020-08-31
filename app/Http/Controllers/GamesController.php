@@ -139,6 +139,7 @@ class GamesController
                 )->take(6) : null,
                 'criticRating' => isset($game['aggregated_rating']) ? round($game['aggregated_rating']) : 0,
                 'summary' => $game['summary'],
+                'rating' => $game['rating'] ?? 0, 
                 'storyline' => isset($game['storyline']) ? $game['storyline'] : null,
                 'release_date' => Carbon::parse($game['first_release_date'])->format('d M, Y'),
                 'themes' => (isset($game['themes'])) ? (collect($game['themes'])->pluck('name')->implode(' | ')) : null,

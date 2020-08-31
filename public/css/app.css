@@ -15518,6 +15518,10 @@ img[data-src][src*="data:image"] {
   height: 187px;
 }
 
+.w-xsmall {
+  width: 2.4rem;
+}
+
 a.uk-link-heading:hover,
 .uk-link-heading a:hover,
 .uk-link-toggle:hover .uk-link-heading,
@@ -15528,6 +15532,10 @@ a.uk-link-heading:hover,
 .uk-slidenav:hover,
 .uk-slidenav:focus {
   color: rgba(254, 245, 238, 0.95);
+}
+
+.uk-table td {
+  padding: 6px 12px;
 }
 
 #header .search-bar {
@@ -15626,10 +15634,5 @@ a.uk-link-heading:hover,
             backdrop-filter: blur(5px) contrast(0.8);
     background-color: rgba(26, 28, 43, 0.5);
   }
-}
-
-#left > .rating {
-  bottom: 0;
-  right: 0;
 }
 

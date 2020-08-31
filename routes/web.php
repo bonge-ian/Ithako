@@ -9,3 +9,4 @@ Route::get('/view/{slug}', [GamesController::class, 'show'])->name('games.show')
 
 Route::get('/games', [PagesController::class, 'games'])->name('pages.games');
 Route::get('/games/coming-soon', [PagesController::class, 'comingSoonGames'])->name('pages.coming-soon');
+Route::get('/games/top-50-games', [PagesController::class, 'top50Games'])->name('pages.top-50-games');
