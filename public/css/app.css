@@ -15628,3 +15628,8 @@ a.uk-link-heading:hover,
   }
 }
 
+#left > .rating {
+  bottom: 0;
+  right: 0;
+}
+

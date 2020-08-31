@@ -10,10 +10,45 @@
             <div class='uk-width-2-3@s' id='left'>
                 {{-- todo view for mobile --}}
 
-                <h1 class="uk-heading-small uk-margin-remove-bottom text-white uk-text-capitalize">{{ $game['name']}}
+                <h1 class="uk-heading-small uk-margin-remove-bottom text-white uk-text-capitalize">
+                    {{ $game['name']}}
                 </h1>
                 <hr class="uk-divider-small primary-divider">
                 <p class='uk-text-break'>{{ $game['summary'] }}</p>
+
+                <div class="uk-grid small uk-child-width-1-3 uk-grid-match uk-grid uk-flex-middle  " uk-grid>
+                    <div>
+                        <div class="uk-panel uk-flex uk-flex-middle">
+                            <div class="rating  uk-background-secondary uk-border-circle uk-position-relative "
+                                data-rating="{{ $game['rating'] }}" id="member-rating" style="bottom: 0; right: 0;">
+                                @push('scripts')
+                                @include('_ratings', [
+                                'slug' => 'member-rating',
+                                'rating' => $game['rating'],
+                                'event' => null,
+                                ])
+                                @endpush
+                            </div>
+                            <div class='uk-margin-small-left'>Member Ratings</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-panel uk-flex uk-flex-middle">
+                            <div class="rating  uk-background-secondary uk-border-circle uk-position-relative"
+                                data-rating="{{ $game['criticRating'] }}" id="critic-rating"
+                                style="bottom: 0; right: 0;">
+                                @push('scripts')
+                                @include('_ratings', [
+                                'slug' => 'critic-rating',
+                                'rating' => $game['criticRating'],
+                                'event' => null,
+                                ])
+                                @endpush
+                            </div>
+                            <div class='uk-margin-small-left'>Critical Ratings</div>
+                        </div>
+                    </div>
+                </div>
 
                 @if ($game['trailer'])
                 <h4 class="uk-h3 uk-text-bold text-white">Watch Trailer</h4>
@@ -38,18 +73,19 @@
                 @endif
 
                 @if ($game['screenshots'])
-                    <h6 class="uk-h2 uk-margin-remove-top uk-margin-small-bottom text-white">Screenshots</h6>
-                    <hr class="uk-divider-small primary-divider">
-                    <div uk-grid uk-lightbox="animation: scale"
-                        class="uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1 uk-grid-medium uk-grid-match uk-grid">
-                        @foreach($game['screenshots'] as $screenshot)
-                        <div>
-                            <a class="uk-inline" href="{{ $screenshot['url'] }}" data-caption="Screenshot {{ $loop->iteration }}">
-                                <img data-src="{{ $screenshot['url'] }}" alt="Screenshot" width="889 " height="500" uk-img>
-                            </a>
-                        </div>
-                        @endforeach
+                <h6 class="uk-h2 uk-margin-remove-top uk-margin-small-bottom text-white">Screenshots</h6>
+                <hr class="uk-divider-small primary-divider">
+                <div uk-grid uk-lightbox="animation: scale"
+                    class="uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1 uk-grid-medium uk-grid-match uk-grid">
+                    @foreach($game['screenshots'] as $screenshot)
+                    <div>
+                        <a class="uk-inline" href="{{ $screenshot['url'] }}"
+                            data-caption="Screenshot {{ $loop->iteration }}">
+                            <img data-src="{{ $screenshot['url'] }}" alt="Screenshot" width="889 " height="500" uk-img>
+                        </a>
                     </div>
+                    @endforeach
+                </div>
                 @endif
             </div>
             <aside class='uk-width-1-3@s' id="right">
@@ -149,8 +185,8 @@
         @if ($game['similar_games'])
         <div class="uk-margin-medium-top uk-position-relative " uk-slider="finite: false">
             <h4 class="uk-h2 uk-heading-bullet">You might also like</h4>
-            <ul
-                class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid uk-grid-small" uk-grid uk-height-match="target: > li > div > a > img">
+            <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid uk-grid-small"
+                uk-grid uk-height-match="target: > li > div > a > img">
                 @foreach ($game['similar_games'] as $similarGame)
                 <li>
                     <div class="uk-panel">
@@ -175,8 +211,7 @@
         <div id="modal-media-image" class="uk-flex-top" uk-modal>
             <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
                 <button class="uk-modal-close-outside" type="button" uk-close></button>
-                <img data-src="{{ $game['coverImageUrl'] }}" alt="{{ $game['altText'] }}" width="700"  
-                    uk-img>
+                <img data-src="{{ $game['coverImageUrl'] }}" alt="{{ $game['altText'] }}" width="700" uk-img>
             </div>
         </div>
         <!-- end of modal -->
