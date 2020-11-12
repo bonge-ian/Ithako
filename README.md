@@ -12,17 +12,23 @@ To use this app.
 
 ```
 Clone the repo
-composer install
-Copy .env.exmaple file and rename it to .env
-Add your Twitch Client ID and Twitch Client Secret.
-php artisan key:generate
-npm install
-npm run dev
-Power up your server by running - php artisan serve
 ```
 
-And wholla..
-<br>
+`composer install`
+
+```
+Copy .env.exmaple file and rename it to .env
+Add your Twitch Client ID and Twitch Client Secret.
+```
+
+`php artisan key:generate`<br>
+`npm install`<br>
+`npm run dev`<br>
+`php artisan serve`
+
+And wholla.<br>
 Ithako will be up and running.
 
-&copy; 2020
+---
+
+&copy; [Bonge Inc.](https://bonge-inc.co.ke) 2020
