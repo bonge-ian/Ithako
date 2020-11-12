@@ -20,6 +20,9 @@ class GamesController
         $latestOnXboxSeries = $this->latestOnXboxSeries();
         $latestOnPC = $this->latestOnPC();
 
+
+
+
         return view('index')->with([
             'comingSoonOnPS5' => $comingSoonOnPS5,
             'latestOnXboxSeries' => $latestOnXboxSeries,
@@ -72,7 +75,7 @@ class GamesController
                 ->post('https://api.igdb.com/v4/release_dates/')
                 ->json()
         )->pluck('game');
-
+        // return $game;
         return Cache::remember(
             'comingSoonOnPS5',
             now('Africa/Nairobi')->addHours(6),
@@ -89,11 +92,10 @@ class GamesController
                 ->withBody(
                     sprintf(
                         'fields id, name, cover.url, slug;
-                        where platforms = 169 first_release_date > %s & first_release_date < %s;
+                        where platforms = 169 & first_release_date > %s;
                         sort first_release_date desc;
                         limit 1;',
-                        now('Africa/Nairobi')->subMonths(4)->timestamp,
-                        now('Africa/Nairobi')->addMonths(2)->timestamp
+                        now('Africa/Nairobi')->subMonths(4)->timestamp
                     ),
                     'text'
                 )
