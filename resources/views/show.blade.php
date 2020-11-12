@@ -16,7 +16,8 @@
                 <hr class="uk-divider-small primary-divider">
                 <p class='uk-text-break'>{{ $game['summary'] }}</p>
 
-                <div class="uk-grid small uk-child-width-1-3 uk-grid-match uk-grid uk-flex-middle  " uk-grid>
+                <div class="uk-grid small uk-child-width-1-3@l uk-child-width-1-2  uk-grid-match uk-grid uk-flex-middle  "
+                    uk-grid>
                     <div>
                         <div class="uk-panel uk-flex uk-flex-middle">
                             <div class="rating  uk-background-secondary uk-border-circle uk-position-relative "
