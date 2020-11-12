@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\IGDB;
 use App\Helpers\FormatGames;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -20,17 +21,20 @@ class PagesController
         $offset = $per_page * ($page - 1);
 
         $rawGames = collect(
-            Http::withHeaders(config('services.igdb'))
-                ->withOptions([
-                    'body' => sprintf('
+            Http::withHeaders([
+                'Client-ID' => env('TWITCH_APP_ID'),
+            ])->withToken(IGDB::auth())
+                ->withBody(
+                    sprintf('
                         fields name, cover.url, slug, genres.name, platforms.abbreviation,rating;
-                        where platforms = (6, 48, 49, 130) & themes.name != ("Erotic");
+                        where platforms = (6, 48, 49, 130,167,169) & themes.name != ("Erotic");
                         sort popularity desc;
                         limit %s;
                         offset %s;
-                    ', $per_page, $offset)
-                ])
-                ->get('https://api-v3.igdb.com/games/')
+                    ', $per_page, $offset),
+                    'text'
+                )
+                ->post('https://api.igdb.com/v4/games/')
                 ->json()
         );
 
@@ -45,16 +49,19 @@ class PagesController
     public function top50Games()
     {
         $rawGames = collect(
-            Http::withHeaders(config('services.igdb'))
-                ->withOptions([
-                    'body' => '
+            Http::withHeaders([
+                'Client-ID' => env('TWITCH_APP_ID'),
+            ])->withToken(IGDB::auth())
+                ->withBody(
+                    '
                         fields name, cover.url, slug, total_rating;
-                        where platforms = (6, 48, 49, 130) & themes.name != ("Erotic") & total_rating_count > 700 & total_rating > 80;
+                        where platforms = (6, 48, 49, 130,167,169) & themes.name != ("Erotic") & total_rating_count > 700 & total_rating > 80;
                         sort total_rating desc;
                         limit 50;
-                    '
-                ])
-                ->get('https://api-v3.igdb.com/games/')
+                    ',
+                    'text'
+                )
+                ->post('https://api.igdb.com/v4/games/')
                 ->json()
         );
 

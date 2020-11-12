@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\FormatGames;
+use App\IGDB;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -15,14 +16,13 @@ class GamesController
 
     public function index()
     {
-        $comingSoonOnPS4 = $this->comingSoonOnPS4();
-        $popularOnXboxOne = $this->popularOnXboxOne();
+        $comingSoonOnPS5 = $this->comingSoonOnPS5();
+        $latestOnXboxSeries = $this->latestOnXboxSeries();
         $latestOnPC = $this->latestOnPC();
 
-
         return view('index')->with([
-            'comingSoonOnPS4' => $comingSoonOnPS4,
-            'popularOnXboxOne' => $popularOnXboxOne,
+            'comingSoonOnPS5' => $comingSoonOnPS5,
+            'latestOnXboxSeries' => $latestOnXboxSeries,
             'latestOnPC' => $latestOnPC
         ]);
     }
@@ -30,18 +30,21 @@ class GamesController
     public function show(string $slug)
     {
         $rawGame = collect(
-            Http::withHeaders(config('services.igdb'))
-                ->withOptions([
-                    'body' => sprintf('
+            Http::withHeaders([
+                'Client-ID' => env('TWITCH_APP_ID'),
+            ])->withToken(IGDB::auth())
+                ->withBody(
+                    sprintf('
                         fields id, name, cover.url, summary, storyline, status, first_release_date, status,
                         genres.name, screenshots.url, videos.video_id, websites.category, websites.url,
                         rating, aggregated_rating, platforms.abbreviation,
                         similar_games.name, similar_games.slug, similar_games.cover.url, themes.name;
                         where slug = "%s";
                         limit 1;
-                    ', $slug)
-                ])
-                ->get('https://api-v3.igdb.com/games/')
+                    ', $slug),
+                    'text'
+                )
+                ->post('https://api.igdb.com/v4/games/')
                 ->json()
         );
 
@@ -49,50 +52,57 @@ class GamesController
         return view('show')->with('game', $this->formatShowGameView(collect($rawGame)));
     }
 
-    private function comingSoonOnPS4()
+    private function comingSoonOnPS5()
     {
         $game =  collect(
-            Http::withHeaders(config('services.igdb'))
-                ->withOptions([
-                    'body' => sprintf(
+            Http::withHeaders([
+                'Client-ID' => env('TWITCH_APP_ID'),
+            ])->withToken(IGDB::auth())
+                ->withBody(
+                    sprintf(
                         'fields game.id, game.name, game.cover.url, game.slug, game.url;
-                        where platform = 48 & date > %s & game.cover.url != null;
+                        where platform = 167 & date > %s & game.cover.url != null;
                         sort date asc;
                         sort popularity desc;
                         limit 1;',
                         now('Africa/Nairobi')->addMonths(5)->timestamp
-                    )
-                ])
-                ->get('https://api-v3.igdb.com/release_dates/')
+                    ),
+                    'text'
+                )
+                ->post('https://api.igdb.com/v4/release_dates/')
                 ->json()
         )->pluck('game');
 
         return Cache::remember(
-            'comingSoonOnPS4',
+            'comingSoonOnPS5',
             now('Africa/Nairobi')->addHours(6),
             fn () => $this->format($game, '1080p')->first(),
         );
     }
 
-    private function popularOnXboxOne()
+    private function latestOnXboxSeries()
     {
         $game =  collect(
-            Http::withHeaders(config('services.igdb'))
-                ->withOptions([
-                    'body' => sprintf(
+            Http::withHeaders([
+                'Client-ID' => env('TWITCH_APP_ID'),
+            ])->withToken(IGDB::auth())
+                ->withBody(
+                    sprintf(
                         'fields id, name, cover.url, slug;
-                        where platforms = 49  & rating > 80;
+                        where platforms = 169 first_release_date > %s & first_release_date < %s;
                         sort first_release_date desc;
-                        sort popularity desc;
-                        limit 1;'
-                    )
-                ])
-                ->get('https://api-v3.igdb.com/games/')
+                        limit 1;',
+                        now('Africa/Nairobi')->subMonths(4)->timestamp,
+                        now('Africa/Nairobi')->addMonths(2)->timestamp
+                    ),
+                    'text'
+                )
+                ->post('https://api.igdb.com/v4/games/')
                 ->json()
         );
 
         return Cache::remember(
-            'popularOnXboxOne',
+            'latestOnXboxSeries',
             now('Africa/Nairobi')->addHours(6),
             fn () => $this->format(collect($game), '720p')->first()->except('platforms', 'genres')
         );
@@ -101,9 +111,11 @@ class GamesController
     private function latestOnPC()
     {
         $game =  collect(
-            Http::withHeaders(config('services.igdb'))
-                ->withOptions([
-                    'body' => sprintf(
+            Http::withHeaders([
+                'Client-ID' => env('TWITCH_APP_ID'),
+            ])->withToken(IGDB::auth())
+                ->withBody(
+                    sprintf(
                         'fields id, name, cover.url, slug;
                         where platforms = 6 &
                         first_release_date > %s & first_release_date < %s;
@@ -111,9 +123,10 @@ class GamesController
                         limit 1;',
                         now('Africa/Nairobi')->subMonths(4)->timestamp,
                         now('Africa/Nairobi')->timestamp
-                    )
-                ])
-                ->get('https://api-v3.igdb.com/games/')
+                    ),
+                    'text'
+                )
+                ->post('https://api.igdb.com/v4/games/')
                 ->json()
         );
 
@@ -139,7 +152,7 @@ class GamesController
                 )->take(6) : null,
                 'criticRating' => isset($game['aggregated_rating']) ? round($game['aggregated_rating']) : 0,
                 'summary' => $game['summary'],
-                'rating' => $game['rating'] ?? 0, 
+                'rating' => $game['rating'] ?? 0,
                 'storyline' => isset($game['storyline']) ? $game['storyline'] : null,
                 'release_date' => Carbon::parse($game['first_release_date'])->format('d M, Y'),
                 'themes' => (isset($game['themes'])) ? (collect($game['themes'])->pluck('name')->implode(' | ')) : null,

@@ -9,23 +9,23 @@
         <div class="uk-width-3-4@l uk-grid-item-match coming-soon">
             <div class="uk-flex">
                 <div class="uk-tile uk-width-1-1 uk-flex-bottom uk-flex uk-background-cover uk-background-center-center uk-background-norepeat"
-                    data-src="{{ $comingSoonOnPS4['coverImageUrl'] }}" uk-img='width: 1139px;height: 672.4px'>
+                    data-src="{{ $comingSoonOnPS5['coverImageUrl'] }}" uk-img='width: 1139px;height: 672.4px'>
                     <div class="uk-panel uk-width-1-1">
                         <div
                             class="uk-panel uk-width-large uk-margin uk-overlay uk-padding-small uk-border-rounded desc-overlay">
                             <div class="uk-margin-remove-bottom uk-h4 uk-margin-top ">
                                 <h5 class="uk-h6 uk-margin-remove-bottom uk-text-muted uk-text-bold">Coming soon on
                                 </h5>
-                                <a href="#" class="uk-link-heading  text-primary">PlayStation 4</a>
+                                <a href="#" class="uk-link-heading  text-primary">PlayStation 5</a>
                             </div>
                             <h2 class="uk-h1 uk-margin-top uk-margin-remove-bottom game-title">
-                                <a href="{{ route('games.show', $comingSoonOnPS4['slug']) }}"
+                                <a href="{{ route('games.show', $comingSoonOnPS5['slug']) }}"
                                     class="uk-link-reset  uk-text-bold">
-                                    {{ $comingSoonOnPS4['name'] }}
+                                    {{ $comingSoonOnPS5['name'] }}
                                 </a>
                             </h2>
                             <div class="uk-margin-top">
-                                <a href="{{ $comingSoonOnPS4['url'] }}" target="_blank"
+                                <a href="{{ $comingSoonOnPS5['url'] }}" target="_blank"
                                     class="uk-button game-link uk-border-rounded  button-transparent">Check
                                     details</a>
                             </div>
@@ -39,21 +39,21 @@
                 <div>
                     <div class="uk-inline-clip hero-card">
                         <canvas width="595" height="336"></canvas>
-                        <img alt="{{ $popularOnXboxOne['altText'] }}" uk-img uk-cover
-                            data-src="{{ $popularOnXboxOne['coverImageUrl'] }}">
+                        <img alt="{{ $latestOnXboxSeries['altText'] }}" uk-img uk-cover
+                            data-src="{{ $latestOnXboxSeries['coverImageUrl'] }}">
                         <div
                             class="uk-overlay uk-panel uk-padding uk-position-bottom-left uk-padding-small uk-border-rounded uk-width-2-3 uk-position-medium desc-overlay">
                             <div class="uk-h5 uk-margin-top uk-margin-remove-bottom">
-                                <h6 class="uk-h6 uk-margin-remove-bottom uk-text-muted uk-text-bold">Popular on</h6>
-                                <a href="{{ route('games.show', $popularOnXboxOne['slug']) }}"
+                                <h6 class="uk-h6 uk-margin-remove-bottom uk-text-muted uk-text-bold">Latest on</h6>
+                                <a href="{{ route('games.show', $latestOnXboxSeries['slug']) }}"
                                     class="uk-link-heading text-primary" rel="tag">
                                     Xbox Series
                                 </a>
                             </div>
                             <h2 class="  uk-h4 uk-margin-small-top uk-margin-remove-bottom game-title">
-                                <a href="{{ route('games.show', $popularOnXboxOne['slug']) }}"
+                                <a href="{{ route('games.show', $latestOnXboxSeries['slug']) }}"
                                     class="uk-link-reset uk-text-bold ">
-                                    {{ $popularOnXboxOne['name'] }}
+                                    {{ $latestOnXboxSeries['name'] }}
                                 </a>
                             </h2>
                         </div>

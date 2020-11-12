@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\IGDB;
+use Livewire\Component;
 use App\Helpers\FormatGames;
 use Illuminate\Support\Facades\Http;
-use Livewire\Component;
 
 class Search extends Component
 {
@@ -16,15 +17,17 @@ class Search extends Component
     public function fetch()
     {
         $rawGames = collect(
-            Http::withHeaders(config('services.igdb'))
-                ->withOptions([
-                    'body' => sprintf('
+            Http::withHeaders([
+                'Client-ID' => env('TWITCH_APP_ID'),
+            ])->withToken(IGDB::auth())
+                ->withBody(
+                      sprintf('
                         fields name, slug, cover.url;
                         search "%s";
                         limit 6;
-                    ', $this->search)
-                ])
-                ->get('https://api-v3.igdb.com/games/')
+                    ', $this->search), 'text'
+                 )
+                ->post('https://api.igdb.com/v4/games/')
                 ->json()
         );
 

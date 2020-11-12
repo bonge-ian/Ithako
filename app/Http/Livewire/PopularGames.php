@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\IGDB;
+use Livewire\Component;
 use App\Helpers\FormatGames;
 use Illuminate\Support\Collection;
-use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
@@ -22,20 +23,22 @@ class PopularGames extends Component
 			'livewire.popularGames',
 			now('Africa/Nairobi')->addHours(6),
 			fn () => collect(
-				Http::withHeaders(config('services.igdb'))
-					->withOptions([
-						'body' => sprintf(
-							'fields id, slug, name, genres.name, platforms.abbreviation,cover.url, rating;
-                        where platforms = (49,48,130,6)
+				Http::withHeaders([
+					'Client-ID' => env('TWITCH_APP_ID'),
+				])->withToken(IGDB::auth())
+					->withBody(
+						 sprintf(
+						'fields id, slug, name, genres.name, platforms.abbreviation,cover.url, rating;
+                        where platforms = (49,48,130,6,167,169)
                         & first_release_date > %s & first_release_date < %s
                         & cover.url != null & themes.name != ("Erotic");
                         sort popularity desc;
                         limit 10;',
 							$before,
 							now()->timestamp
-						),
-					])
-					->get('https://api-v3.igdb.com/games')
+						), 'text'
+					 )
+					->post('https://api.igdb.com/v4/games')
 					->json()
 			)
 		);
