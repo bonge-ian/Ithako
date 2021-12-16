@@ -20,9 +20,6 @@ class GamesController
         $latestOnXboxSeries = $this->latestOnXboxSeries();
         $latestOnPC = $this->latestOnPC();
 
-
-
-
         return view('index')->with([
             'comingSoonOnPS5' => $comingSoonOnPS5,
             'latestOnXboxSeries' => $latestOnXboxSeries,
